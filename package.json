@@ -1,0 +1,17 @@
+{
+  "name": "glitchclient",
+  "version": "1.0.0",
+  "description": "Client to connect to web hook",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adina Shanholtz (FeyTechnologist)",
+  "license": "ISC",
+  "dependencies": {
+    "base64-img": "^1.0.3",
+    "express": "^4.15.2",
+    "http": "0.0.0",
+    "node-base64-image": "^1.0.3"
+  }
+}
