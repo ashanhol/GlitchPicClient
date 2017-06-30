@@ -41,10 +41,12 @@ app.post('/upload', upload.single('file'), function (req, res, next) {
 
       //The actual http request sent to azure functions
       var req = https.request(options, function(res) {
-        //try to delete the uploaded picture file since it's already read in
+      
+      //try to delete the uploaded picture file since it's already read in
         fs.unlink(tempPath, function (delerr) {
-              if (delerr) console.log(relerr);
+          if (delerr) console.log(relerr);
         });
+        
         console.log('STATUS: ' + res.statusCode);
         console.log('HEADERS: ' + JSON.stringify(res.headers));
         res.setEncoding('utf8');
@@ -62,6 +64,9 @@ app.post('/upload', upload.single('file'), function (req, res, next) {
               fs.writeFile("temp/glitchpic.jpg", imageBuffer.data, function(wrterr) {
                 if(wrterr) console.log(err);
                 console.log("The file was saved!"); 
+                app.get('/image.png', function (req, res) {
+                  res.sendfile(path.resolve('./temp/glitchpic.jpg'));
+                }); 
               });
             }
           })
@@ -77,6 +82,7 @@ app.post('/upload', upload.single('file'), function (req, res, next) {
       req.end();
 
     });
+   
   //  if (path.extname(req.file.toString()).toLowerCase() === '.png') {
         
 
