@@ -3,4 +3,69 @@
     <input type="submit" value="Submit">
 </form>
 
+<span style="display: block"></span>
+
 <img src="/image.png" />
+
+<script>
+  var image = document.querySelector('img'); 
+  var form = document.querySelector('form');
+  var message = document.querySelector('span');
+
+  var glitchStatus = "Glitching your image, please wait!";
+  var imageTypeStatus = "Oops, we need an image in .png, .gif, .jpg, or .jpeg format!";
+
+  var getGlitchedImage = function(data) {
+    // we return the promise from calling fetch, which will resolve to a json response eventually
+    return fetch('/upload', {
+      method: 'POST',
+      body: data
+    }).then(function(res) {
+      return res.json();
+    }).catch(function(reason) {
+      return new Error('glitch request went wrong:', reason);
+    });
+  };
+
+  var onSubmit = function(event) {
+    // prevent the form from taking us away from this page 
+    event.preventDefault();
+
+    // show message so the user knows something is happening
+    message.textContent = glitchStatus;
+
+    // hide previous glitched image
+    image.style.display = 'none';
+    
+    // grab the file data from the form 
+    var data = new FormData(event.target);
+
+    // simplistic file type checker
+    if (data.get('file').type.indexOf('image') < 0) {
+      message.textContent = imageTypeStatus;
+      // don't proceed with glitching
+      return;
+    }
+
+    // request glitched image from nodejs backend, and then display image
+    getGlitchedImage(data)
+      .then(function(res) {
+        if (res.image) {
+          // set the source attribute of the image to our base64 glitch call response
+          image.src = res.image;
+          // show the image
+          image.style.display = 'block';
+
+          // hide status again
+          message.textContent = '';
+        }
+      })
+      .catch(function(reason) {
+        console.error(reason)
+      });
+  };
+
+  // attach our function handler to the submit event of the form
+  form.addEventListener('submit', onSubmit);
+
+</script>
