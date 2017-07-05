@@ -16,8 +16,9 @@ app.listen(3000, function () {
 //Post request when user uploads a file
 app.post('/upload', upload.single('file'), function (req, res, next) {
 
+  console.log(req.body.type);
   //Data is the JSON object sent to the Azure function. Will contain the type of glitch and picture. 
-  var data = {"type": "3", "base64Picture": req.file.buffer.toString('base64')};
+  var data = {"type": req.body.type, "base64Picture": req.file.buffer.toString('base64')};
   var options = {
     hostname: 'glitchfunction.azurewebsites.net',
     port: 443,
