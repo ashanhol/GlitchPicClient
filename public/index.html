@@ -2,22 +2,44 @@
 <html>
 <head>
 <title>GlitchPic</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+
 </head>
 
-<body>
-    <form method="post" enctype="multipart/form-data" action="/upload">
-    <input type="radio" name="type" value="1"> Mild Random Color Glitch<br>
-    <input type="radio" name="type" value="2"> Super Random Color Glitch<br>
-    <input type="radio" name="type" value="3"> Noise<br>
-    <input type="radio" name="type" value="4"> Bars<br>
-    <input type="file" name="file">
-    <input type="submit" value="Submit">
-    </form>
+<body onload="hideImage()">
+    <h1 style="text-align: center">✨Glitch That Pic✨</h1>
+    <h4>Choose Your Glitch!</h4>
+        <form method="post" enctype="multipart/form-data" action="/upload" class="form-inline">
+            <div class ="form-group">
+                <label class="radio-inline">
+                    <input type="radio" name="type" value="1" checked=true> Mild Random Color Glitch<br>
+                </label>
+                <label class="radio-inline">        
+                    <input type="radio" name="type" value="2"> Super Random Color Glitch<br>
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="type" value="3"> Noise<br>
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="type" value="4"> Bars<br>
+                </label>
+            </div>
+            <br/>
+            <div class ="form-group">
+                <input type="file" name="file">
+                <p class="help-block">Picture files only please.</p>
+                <input type="submit" class="btn btn-default" value="Submit">
+            </div>
+        </form>
 
-    <span style="display: block"></span>
-
-    <img src="/image.png" />
-
+    <span style="display: block;text-align: center;"></span>
+    <h3>Our Lovely Image</h3>
+    <div id="image">
+        <img src="/image.png" id="pic" />
+    </div>
+    
     <script>
     var image = document.querySelector('img'); 
     var form = document.querySelector('form');
@@ -25,6 +47,11 @@
 
     var glitchStatus = "Glitching your image, please wait!";
     var imageTypeStatus = "Oops, we need an image in .png, .gif, .jpg, or .jpeg format!";
+
+    function hideImage() {
+        document.getElementById("pic").style.display = 'none';
+        //image.style.display = 'none';
+    }
 
     var getGlitchedImage = function(data) {
         // we return the promise from calling fetch, which will resolve to a json response eventually

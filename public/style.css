@@ -1,0 +1,33 @@
+div {
+    display: block;
+    text-align: center;
+    align-content: center;
+    padding: 10px;
+}
+body {
+    background-color: SkyBlue;
+    font-family: Helvetica, sans-serif;
+    font-size: 2em;
+    text-align: center;
+}
+h1{
+    color:  white;
+}
+#image{
+    align-content: center;
+    height: 50%;
+    width: 50%;
+    border-style: solid;
+    border-color: white;
+    border-width: 5px;
+    margin-left: 25%;
+}
+img{
+    height: 100%;
+    width: 100%;
+    align-content: center;
+    border: 5px;
+}
+span{
+    padding: 15px;
+}
