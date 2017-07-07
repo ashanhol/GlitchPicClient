@@ -1,5 +1,6 @@
 # GlitchPicClient
 Web client for glitch art!
+[Try it out here!](http://glitchpic.azurewebsites.net/)
 ![WebApp](/app.png)
 
 ### About ###
@@ -13,4 +14,4 @@ The process:
 A copy of the glitch function code can be found in this repo at [run.csx](/run.csx). 
 
 ### Acknowledgements ###
-A huge thank you to [Suz Hinton](https://github.com/noopkat) for helping me with the upload feature and [Rachel Weil](https://github.com/hxlnt) for debugging help!  
+A huge thank you to [Suz Hinton](https://github.com/noopkat) for helping with the upload feature and [Rachel Weil](https://github.com/hxlnt) for debugging help!  
