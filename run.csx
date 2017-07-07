@@ -38,19 +38,7 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
             i = (Bitmap) Bitmap.FromStream(ms, true);
 
         }
-       // i.RotateFlip(RotateFlipType.Rotate180FlipX);
 
-        //do stuff with image here
-       /* for (int x = 0; x < i.Width; x++)
-        {
-            for (int y = 0; y < i.Height; y++)
-            {
-                Color pixelColor = i.GetPixel(x, y);
-                Color newColor = Color.FromArgb((pixelColor.R<< GetRandomNumber(32)) & 0xff, (pixelColor.G<< GetRandomNumber(32)) & 0xff, (pixelColor.B<< GetRandomNumber(32)) & 0xff);
-                i.SetPixel(x, y, newColor);
-            }
-                
-        }*/
         //glitchtype 1 = colorglitch, 2 = colorswap, 3 = ??, 4 = bars
         int roffset, goffset, boffset; 
         roffset = goffset = boffset = 0;
