@@ -2,16 +2,27 @@ var express = require('express');
 var https = require('https');
 var multer  = require('multer');
 var storage = multer.memoryStorage();
-var upload = multer({ storage: storage })
-
+var upload = multer({ storage: storage });
 var app = express();
-app.use(express.static('public'))
+var server = require('http').createServer(app); 
+
+
+//app.use(express.static('public'))
+app.use(express.static(__dirname + '/public'));
+
 
 app.get('/', function () {})
 
-app.listen(3000, function () {
+var port = process.env.PORT || '3000';
+server.listen(port, function () {
   console.log('Glitch app listening on port 3000!')
-})
+});
+
+
+
+//app.listen(port, function () {
+ // console.log('Glitch app listening on port 3000!')
+//})
 
 //Post request when user uploads a file
 app.post('/upload', upload.single('file'), function (req, res, next) {
