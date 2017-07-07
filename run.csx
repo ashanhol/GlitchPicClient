@@ -39,16 +39,41 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
 
         }
 
-        //glitchtype 1 = colorglitch, 2 = colorswap, 3 = ??, 4 = bars
+        //glitchtype 1 = colorglitch, 2 = colorswap, 3 = noise, 4 = bars
         int roffset, goffset, boffset; 
         roffset = goffset = boffset = 0;
         //1
-        if(glitchType==1) roffset = goffset = boffset= GetRandomNumber(32);
+        if(glitchType==1) roffset = goffset = boffset = GetRandomNumber(5)+1;
         //2
         else if(glitchType == 2){
-            roffset = GetRandomNumber(32);
-            goffset = GetRandomNumber(32); 
-            boffset = GetRandomNumber(32);
+            switch (GetRandomNumber(4))
+                {
+                    case 0:
+                        roffset = GetRandomNumber(3);
+                        goffset = GetRandomNumber(3); 
+                        boffset = GetRandomNumber(7);
+                        log.Info("case 0");
+                        break;
+                    case 1:
+                        roffset = GetRandomNumber(7);
+                        goffset = GetRandomNumber(3); 
+                        boffset = GetRandomNumber(3);
+                        log.Info("case 1");
+                        break;
+                    case 2: 
+                        roffset = GetRandomNumber(3);
+                        goffset = GetRandomNumber(7); 
+                        boffset = GetRandomNumber(3);
+                        log.Info("case 2");
+                        break;
+                    default:
+                        roffset = GetRandomNumber(7);
+                        goffset = GetRandomNumber(7); 
+                        boffset = GetRandomNumber(7);
+                        log.Info("case default");
+                        break;
+                }
+            log.Info("r: "+ roffset + " g: " + goffset + " b: " + boffset);
         }
         
         for (int x = 0; x < i.Width; x++)
@@ -80,7 +105,7 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
             byte[] byteImage = sm.ToArray();
 
             // Convert byte[] to base 64 string
-            b64picedit = Convert.ToBase64String(byteImage);
+            b64picedit = Convert.ToBase64String(byteImage).Insert(0,"data:image/jpeg;base64,");
         }
 
 
